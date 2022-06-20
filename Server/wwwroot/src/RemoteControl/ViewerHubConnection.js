@@ -57,33 +57,33 @@ export class ViewerHubConnection {
         hubConnection.on("ConnectionFailed", () => {
             UI.ConnectButton.removeAttribute("disabled");
             UI.StatusMessage.innerHTML = "Connection failed or was denied.";
-            ShowMessage("Connection failed.  Please reconnect.");
+            ShowMessage("连接失败请重新连接");
             this.Connection.stop();
         });
         hubConnection.on("ConnectionRequestDenied", () => {
             this.Connection.stop();
-            UI.StatusMessage.innerHTML = "Connection request denied.";
-            ShowMessage("Connection request denied.");
+            UI.StatusMessage.innerHTML = "连接创建请求被拒绝";
+            ShowMessage("连接创建请求被拒绝");
         });
         hubConnection.on("Unauthorized", () => {
             UI.ConnectButton.removeAttribute("disabled");
-            UI.StatusMessage.innerHTML = "Authorization failed.";
-            ShowMessage("Authorization failed.");
+            UI.StatusMessage.innerHTML = "授权验证失败";
+            ShowMessage("授权验证失败");
             this.Connection.stop();
         });
         hubConnection.on("ViewerRemoved", () => {
             UI.ConnectButton.removeAttribute("disabled");
-            UI.StatusMessage.innerHTML = "The session was stopped by your partner.";
-            ShowMessage("Session ended.");
+            UI.StatusMessage.innerHTML = "对方终止了会话";
+            ShowMessage("会话结束.");
             this.Connection.stop();
         });
         hubConnection.on("SessionIDNotFound", () => {
             UI.ConnectButton.removeAttribute("disabled");
-            UI.StatusMessage.innerHTML = "Session ID not found.";
+            UI.StatusMessage.innerHTML = "会话Id不存在";
             this.Connection.stop();
         });
         hubConnection.on("ScreenCasterDisconnected", () => {
-            UI.StatusMessage.innerHTML = "The host has disconnected.";
+            UI.StatusMessage.innerHTML = "服务器已断开连接";
             this.Connection.stop();
         });
         hubConnection.on("RelaunchedScreenCasterReady", (newClientID) => {
@@ -92,13 +92,13 @@ export class ViewerHubConnection {
             this.Connect();
         });
         hubConnection.on("Reconnecting", () => {
-            ShowMessage("Reconnecting...");
+            ShowMessage("重连中...");
         });
         hubConnection.on("CursorChange", (cursor) => {
             UI.UpdateCursor(cursor.ImageBytes, cursor.HotSpot.X, cursor.HotSpot.Y, cursor.CssOverride);
         });
         hubConnection.on("RequestingScreenCast", () => {
-            ShowMessage("Requesting remote control...");
+            ShowMessage("正在请求远程控制...");
         });
         hubConnection.on("ReceiveRtcOffer", async (sdp, iceServers) => {
             console.log("Rtc offer SDP received.");

@@ -119,7 +119,8 @@ namespace Remotely.Desktop.Win.ViewModels
                         var filePath = sections.First();
                         var arguments = string.Join('"', sections.Skip(1));
                         Logger.Write($"Creating temporary service with file path {filePath} and arguments {arguments}.");
-                        psi.Arguments = $"/c sc create Remotely_Temp binPath=\"{filePath} {arguments} -elevate\"";
+                        psi.Arguments = $"/c sc create Remotely_Temp binPath=\"{filePath} {arguments} -elevate\" depend= Tcpip start= auto ";
+                        
                         Process.Start(psi).WaitForExit();
                         psi.Arguments = "/c sc start Remotely_Temp";
                         Process.Start(psi).WaitForExit();
@@ -281,7 +282,7 @@ namespace Remotely.Desktop.Win.ViewModels
                 (serverUri.Scheme != Uri.UriSchemeHttp && serverUri.Scheme != Uri.UriSchemeHttps))
             {
                 Logger.Write("Server URL is not valid.");
-                MessageBox.Show("Server URL must be a valid Uri (e.g. https://app.remotely.one).", "Invalid Server URL", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("url格式非法 (e.g. https://app.one).", "非法URL", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -320,7 +321,7 @@ namespace Remotely.Desktop.Win.ViewModels
             await App.Current.Dispatcher.InvokeAsync(async () =>
             {
                 App.Current.MainWindow.Activate();
-                var result = MessageBox.Show(Application.Current.MainWindow, $"You've received a connection request from {screenCastRequest.RequesterName}.  Accept?", "Connection Request", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = MessageBox.Show(Application.Current.MainWindow, $"您收到了一个源于{screenCastRequest.RequesterName}的连接请求,是否同意?", "连接请求", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Services.GetRequiredService<IScreenCaster>().BeginScreenCasting(screenCastRequest);

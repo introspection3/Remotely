@@ -5,10 +5,10 @@ const PartialDownloads = {};
 export async function UploadFiles(fileList) {
     if (!FileTransferProgress.parentElement.hasAttribute("hidden")) {
         FileTransferInput.value = null;
-        ShowMessage("File transfer already in progress.");
+        ShowMessage("文件传输正在进行...");
         return;
     }
-    ShowMessage("File upload started...");
+    ShowMessage("文件上传已开始...");
     FileTransferProgress.value = 0;
     FileTransferProgress.parentElement.removeAttribute("hidden");
     try {
@@ -17,17 +17,17 @@ export async function UploadFiles(fileList) {
             var buffer = await fileList[i].arrayBuffer();
             await ViewerApp.MessageSender.SendFile(new Uint8Array(buffer), fileList[i].name);
         }
-        ShowMessage("File upload completed.");
+        ShowMessage("文件上传已完成.");
     }
     catch (_a) {
-        ShowMessage("File upload failed.");
+        ShowMessage("文件上传失败.");
     }
     FileTransferInput.value = null;
     FileTransferProgress.parentElement.setAttribute("hidden", "hidden");
 }
 export async function ReceiveFile(file) {
     if (file.StartOfFile) {
-        ShowMessage(`Downloading file ${file.FileName}...`);
+        ShowMessage(`下载文件 ${file.FileName}...`);
     }
     var partial = PartialDownloads[file.MessageId];
     if (!partial) {

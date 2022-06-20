@@ -7,7 +7,7 @@ export class SessionRecorder {
 
     Start() {
         if (!window["MediaRecorder"] || !(GetCurrentViewer() as any).captureStream) {
-            alert("Session recording isn't supported on this browser.");
+            alert("当前浏览器不支持会话录制.");
             return;
         }
 
@@ -37,12 +37,12 @@ export class SessionRecorder {
 
     DownloadVideo() {
         if (!this.RecordedData || this.RecordedData.length == 0) {
-            alert("No video recorded.");
+            alert("没有录制视频.");
             return;
         }
 
         if (this.Recorder && this.Recorder.state != "inactive") {
-            alert("You must stop recording before you can download.");
+            alert("需要先停止录制才能下载");
             return;
         }
         var currentDate = new Date();

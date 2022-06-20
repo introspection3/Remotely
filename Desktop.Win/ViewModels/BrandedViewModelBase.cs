@@ -28,7 +28,7 @@ namespace Remotely.Desktop.Win.ViewModels
             {
                 var brandingInfo = DeviceInitService?.BrandingInfo ?? new BrandingInfo();
 
-                ProductName = "Remotely";
+                ProductName = "FastRC";
 
                 if (!string.IsNullOrWhiteSpace(brandingInfo?.Product))
                 {

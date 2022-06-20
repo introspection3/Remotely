@@ -6,6 +6,7 @@ using Remotely.Shared.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Remotely.Desktop.Core.Services
@@ -68,8 +69,29 @@ namespace Remotely.Desktop.Core.Services
                     }
                     catch { }
                 }
+
+                var url = $"{host.Trim().TrimEnd('/')}/CasterHub";
                 Connection = new HubConnectionBuilder()
-                    .WithUrl($"{host.Trim().TrimEnd('/')}/CasterHub")
+                    .WithUrl(url, options =>
+                    {
+                        options.HttpMessageHandlerFactory = (msgHandler) =>
+                        {
+                            if (msgHandler is HttpClientHandler httpClientHandler)
+                            {
+                                httpClientHandler.ServerCertificateCustomValidationCallback += (sender, certificate, chain, sslPolicyErrors) =>
+                                {
+                                  return true;//判断服务器的公开证书是否和客户端自带的证书相同
+                                };
+                            }
+                            return msgHandler;
+                        };
+                        //针对websocket连接的ssl证书验证,使用websocket连接时必须配置
+                        options.WebSocketConfiguration = (websocketOption) => {
+                            websocketOption.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => {
+                                return true;//判断服务器的公开证书是否和客户端自带的证书相同
+                            };
+                        };
+                    })
                     .AddMessagePackProtocol()
                     .WithAutomaticReconnect()
                     .Build();

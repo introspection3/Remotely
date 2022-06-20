@@ -256,5 +256,89 @@ namespace Remotely.Desktop.Win
             });
             appExitEvent.Wait();
         }
+
+
+        //-----------
+
+        /// <summary>
+        /// 设置程序单例运行
+        /// </summary>
+       // private static Mutex mutex;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+           /* mutex = new Mutex(true, "Channel", out bool ret);
+            if (!ret)
+            {
+                MessageBox.Show("程序正在运行");
+                Environment.Exit(0);
+            }*/
+            base.OnStartup(e);
+            RegisterEvents();
+        }
+
+
+
+
+
+
+        /// <summary>
+        /// 注册事件
+        /// </summary>
+        private void RegisterEvents()
+        {
+            //Task线程内未捕获异常处理事件
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+
+            //UI线程未捕获异常处理事件（UI主线程）
+            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+
+            //非UI线程未捕获异常处理事件(例如自己创建的一个子线程)
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+        }
+        private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            try
+            {
+                var exception = e.Exception as Exception;
+                if (exception != null)
+                {
+                    HandleException(exception);
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+            finally
+            {
+                e.SetObserved();//设置该异常已察觉（这样处理后就不会引起程序崩溃）
+            }
+        }
+
+
+
+        //UI线程未捕获异常处理事件（UI主线程）
+        private static void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            try
+            {
+                HandleException(e.Exception);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+            finally
+            {
+                //处理完后，我们需要将Handler=true表示已此异常已处理过
+                e.Handled = true;
+            }
+        }
+
+        private static void HandleException(Exception e)
+        {
+            //将异常信息写入到日志文件
+            Logger.Write(e.ToString());
+        }
     }
 }

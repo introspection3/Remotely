@@ -45,9 +45,14 @@ namespace Remotely.Desktop.Core.Services
                 {
                     return;
                 }
+                //跳过验证
+                var handler = new HttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = delegate { return true; };
 
-                using var httpClient = new HttpClient();
 
+
+                using var httpClient = new HttpClient(handler);
+                
                 var config = _configService.GetConfig();
 
                 var host = _conductor?.Host;

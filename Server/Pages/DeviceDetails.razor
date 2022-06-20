@@ -31,11 +31,11 @@
 }
 else if (Device is null)
 {
-    <h3>Device not found.</h3>
+    <h3>没有设备.</h3>
 }
 else if (!DataService.DoesUserHaveAccessToDevice(Device.ID, User))
 {
-    <h3>Unauthorized.</h3>
+    <h3>未授权.</h3>
 }
 else
 {
@@ -56,7 +56,7 @@ else
             <TabContent Name="device">
                 <div class="col-sm-8 mb-2">
                     <h3 class="mb-3 mt-3">
-                        Device Details
+                        设备详情
                     </h3>
 
                     <EditForm Model="Device" OnValidSubmit="HandleValidSubmit" @onkeydown="EditFormKeyDown">
@@ -101,9 +101,9 @@ else
                         </div>
                         <div class="form-group row">
                             <label for="agent-storage-percent" class="col-sm-2 col-form-label">
-                                Disk:
+                                磁盘:
                                 <button type="button" class="btn btn-link p-0 m-0" @onclick="ShowAllDisks" style="font-size: 50%">
-                                    (View All)
+                                    (查看所有)
                                 </button>
                             </label>
                             <div class="col-sm-10">
@@ -112,7 +112,7 @@ else
                         </div>
                         <div class="form-group row">
                             <label for="agent-storage-total" class="col-sm-2 col-form-label">
-                                Total Storage:
+                                总容量:
                             </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="agent-storage-total" readonly value="@(Device.TotalStorage)" />
@@ -120,7 +120,7 @@ else
                         </div>
                         <div class="form-group row">
                             <label for="agent-memory-percent" class="col-sm-2 col-form-label">
-                                Memory:
+                                内存比例:
                             </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="agent-memory-percent" readonly value="@(MathHelper.GetFormattedPercent(Device.UsedMemoryPercent))" />
@@ -128,7 +128,7 @@ else
                         </div>
                         <div class="form-group row">
                             <label for="agent-memory-total" class="col-sm-2 col-form-label">
-                                Total Memory:
+                                总内存:
                             </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="agent-memory-total" readonly value="@(Device.TotalMemory)" />
@@ -183,7 +183,7 @@ else
                             </div>
                         </div>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">保存</button>
                         </div>
                     </EditForm>
                 </div>
@@ -193,13 +193,13 @@ else
                 <div class="py-3">
                     @if (!Device.IsOnline)
                     {
-                        <h5 class="text-center mt-5">Device must be online to retrieve logs.</h5>
+                        <h5 class="text-center mt-5">检索日志设备必须在线.</h5>
                     }
                     else
                     {
                         <div class="mb-2">
-                            <button class="btn btn-primary mr-2" @onclick="GetRemoteLogs">Refresh</button>
-                            <button class="btn btn-danger" @onclick="DeleteLogs">Delete Logs</button>
+                            <button class="btn btn-primary mr-2" @onclick="GetRemoteLogs">刷新</button>
+                            <button class="btn btn-danger" @onclick="DeleteLogs">删除日志</button>
                         </div>
 
                         @if (_logLines.Any())
@@ -224,7 +224,7 @@ else
             <TabContent Name="script-history">
 
                 <h3 class="mb-3 mt-3">
-                    Script History
+                    Script 历史
                 </h3>
                 <table class="table table-hover table-striped">
                     <thead>

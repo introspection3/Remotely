@@ -42,7 +42,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" Height="50" Width="50"  Margin="0,0,10,0" Source="{Binding Icon}"></Image>
-                <TextBlock Grid.Column="1" Text="Remote Control Request"  Foreground="{Binding TitleForegroundColor}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="远程控制请求"  Foreground="{Binding TitleForegroundColor}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" />
                 <Button Grid.Column="2" Style="{StaticResource TitlebarButton}" Click="MinimizeButton_Click" Content="____" Foreground="{Binding TitleButtonForegroundColor}" Background="{Binding TitleBackgroundColor}"/>
                 <Button Grid.Column="3" Style="{StaticResource TitlebarButton}" Click="CloseButton_Click" Content="X" Foreground="{Binding TitleButtonForegroundColor}" Background="{Binding TitleBackgroundColor}" />
             </Grid>
@@ -50,15 +50,15 @@
 
         <StackPanel Grid.Row="1">
             <TextBlock Style="{StaticResource SectionHeader}" FontWeight="Bold" FontSize="18" Foreground="DimGray" Margin="10" TextWrapping="Wrap">
-                A remote control session has been requested.
+                有一个远程控制请求.
             </TextBlock>
 
             <TextBlock Style="{StaticResource SectionHeader}" FontWeight="Bold" FontSize="18" Foreground="DimGray" Margin="10" TextWrapping="Wrap">
-                <Run>Would you like to allow </Run>
+                <Run>您是否允许 </Run>
                 <Run Text="{Binding RequesterName}"></Run>
-                <Run> from </Run>
+                <Run> 源于 </Run>
                 <Run Text="{Binding OrganizationName}"></Run>
-                <Run> to control your computer?</Run>
+                <Run> 控制您的电脑?</Run>
             </TextBlock>
         </StackPanel>
       

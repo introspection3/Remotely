@@ -5,18 +5,19 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-    <AssemblyName>Remotely_Desktop</AssemblyName>
+    <AssemblyName>FastRC</AssemblyName>
     <RootNamespace>Remotely.Desktop.Win</RootNamespace>
     <ApplicationIcon>Assets\favicon.ico</ApplicationIcon>
-    <Description>Desktop client for allowing your IT admin to provide remote support.</Description>
-    <Copyright>Copyright ©  2021 Translucency Software</Copyright>
-    <PackageId>Remotely Desktop</PackageId>
-    <Authors>Jared Goodwin</Authors>
-    <Company>Translucency Software</Company>
-    <Product>Remotely Desktop</Product>
-    <PackageProjectUrl>https://remotely.one</PackageProjectUrl>
+    <Description>remote assitant support.</Description>
+    <Copyright>Copyright ©  2022 FastRC</Copyright>
+    <PackageId>FastRC</PackageId>
+    <Authors>FastRC</Authors>
+    <Company>FastRC</Company>
+    <Product>FastRC</Product>
+    <PackageProjectUrl>https://fastrc.net</PackageProjectUrl>
     <Platforms>AnyCPU;x86;x64</Platforms>
     <StartupObject>Remotely.Desktop.Win.App</StartupObject>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

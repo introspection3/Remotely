@@ -18,7 +18,7 @@ export class ClipboardWatcher {
                     navigator.clipboard.writeText(this.NewClipboardText);
                     this.LastClipboardText = this.NewClipboardText;
                     this.NewClipboardText = null;
-                    ShowMessage("Clipboard updated.");
+                    ShowMessage("粘贴板已更新.");
                     return;
                 }
 

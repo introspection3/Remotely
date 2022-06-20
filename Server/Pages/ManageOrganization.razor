@@ -2,7 +2,7 @@
 @attribute [Authorize]
 @inherits AuthComponentBase
 
-<h3 class="mb-3">Manage Organization</h3>
+<h3 class="mb-3">组织管理</h3>
 
 
 @if (User?.IsAdministrator == true)
@@ -11,11 +11,11 @@
         <div class="col-sm-8">
             @* Organization ID *@
             <div class="form-group mw">
-                <label class="mb-1">Organization ID</label>
+                <label class="mb-1">组织 ID</label>
                 <input readonly class="form-control" value="@_organization?.ID" />
             </div>
             <div class="form-group mw">
-                <label class="mb-1">Relay Code</label>
+                <label class="mb-1">中继码</label>
                 <button class="btn btn-sm btn-secondary ml-2" @onclick="ShowRelayCodeHelp">
                     <span id="relayCodeHelp" class="oi oi-question-mark"></span>
                 </button>
@@ -30,7 +30,7 @@
         <div class="col-sm-8">
             @* Organization Name *@
             <div class="form-group mw">
-                <label class="mb-1">Organization Name</label>
+                <label class="mb-1">组织名称</label>
 
                 <div class="input-group">
                     <input @onchange="OrganizationNameChanged"
@@ -41,7 +41,7 @@
                            autocomplete="off" />
                 </div>
                 <div class="text-info small">
-                    * Requires browser refresh.
+                    * 需要浏览器刷新.
                 </div>
             </div>
             @if (User.IsServerAdmin)
@@ -83,7 +83,7 @@
                            @bind="_newDeviceGroupName"
                            @bind:event="oninput"
                            @onkeypress="EvaluateNewDeviceGroupKeyPress" />
-                    <button type="submit" class="btn btn-secondary" @onclick="CreateNewDeviceGroup">Add</button>
+                    <button type="submit" class="btn btn-secondary" @onclick="CreateNewDeviceGroup">添加</button>
                 </div>
             </div>
 
@@ -101,11 +101,11 @@
                 <table class="table table-striped table-hover" style="max-height: 400px">
                     <thead>
                         <tr>
-                            <th>User Name</th>
-                            <th>Administrator</th>
-                            <th>Device Groups</th>
-                            <th>Reset Password</th>
-                            <th>Delete User</th>
+                            <th>用户名</th>
+                            <th>管理员</th>
+                            <th>设备组</th>
+                            <th>重置密码</th>
+                            <th>删除用户</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,17 +140,17 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                <label class="control-label">Invitations</label>
+                <label class="control-label">邀请</label>
                 <button class="btn btn-sm btn-secondary ml-2" @onclick="ShowInvitesHelp">
                     <span id="relayCodeHelp" class="oi oi-question-mark"></span>
                 </button>
                 <table id="invitesTable" class="table table-striped table-hover" style="max-height: 400px">
                     <thead>
                         <tr>
-                            <th>Invited User</th>
-                            <th>Administrator</th>
-                            <th>Link(s)</th>
-                            <th>Delete</th>
+                            <th>被邀请用户</th>
+                            <th>管理员</th>
+                            <th>链接(s)</th>
+                            <th>删除</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -179,16 +179,16 @@
         <div class="col-sm-8">
             <div class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Add User</label>
+                <label class="control-label">添加用户</label>
                 <div class="input-group">
                     <input @bind="_inviteEmail" @bind:event="oninput"
-                           placeholder="Email of user to add"
+                           placeholder="要添加的用户的邮箱"
                            type="email"
                            required
                            class="form-control" />
 
                     <div class="input-group-append">
-                        <span class="input-group-text pr-1">Admin?</span>
+                        <span class="input-group-text pr-1">管理员?</span>
                     </div>
                     <div class="input-group-append">
                         <div class="input-group-text pl-1">
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary" @onclick="SendInvite">Add</button>
+                        <button type="submit" class="btn btn-secondary" @onclick="SendInvite">添加</button>
                     </div>
                 </div>
             </div>
@@ -206,6 +206,6 @@
 }
 else
 {
-    <h5 class="text-muted">Only organization administrators can view this page.</h5>
+    <h5 class="text-muted">只有管理员才能查看此页面.</h5>
 }
 

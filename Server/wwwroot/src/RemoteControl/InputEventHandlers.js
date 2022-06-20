@@ -42,18 +42,18 @@ export function ApplyInputHandlers() {
     });
     TypeClipboardButton.addEventListener("click", (ev) => {
         if (!navigator.clipboard.readText) {
-            alert("Clipboard access isn't supported on this browser.");
+            alert("该浏览器不支持粘贴板访问");
             return;
         }
         if (ViewerApp.ViewOnlyMode) {
-            alert("View-only mode is enabled.");
+            alert("开启了只读模式.");
             return;
         }
         navigator.clipboard.readText().then(text => {
             ViewerApp.MessageSender.SendClipboardTransfer(text, true);
-            ShowMessage("Clipboard sent!");
+            ShowMessage("粘贴板数据已发送!");
         }, reason => {
-            alert("Unable to read clipboard.  Please check your permissions.");
+            alert("不能读取粘贴板.  请检查浏览器权限.");
             console.log("Unable to read clipboard.  Reason: " + reason);
         });
     });
@@ -62,11 +62,11 @@ export function ApplyInputHandlers() {
     });
     CtrlAltDelButton.addEventListener("click", (ev) => {
         if (!ViewerApp.ServiceID) {
-            ShowMessage("Not available for this session.");
+            ShowMessage("当前会话不支持.");
             return;
         }
         if (ViewerApp.ViewOnlyMode) {
-            alert("View-only mode is enabled.");
+            alert("开启了只读模式.");
             return;
         }
         closeAllHorizontalBars(null);
@@ -95,7 +95,7 @@ export function ApplyInputHandlers() {
     });
     FileDownloadButton.addEventListener("click", (ev) => {
         if (ViewerApp.ViewOnlyMode) {
-            alert("View-only mode is enabled.");
+            alert("开启了只读模式.");
             return;
         }
         ViewerApp.MessageSender.SendOpenFileTransferWindow();
@@ -123,7 +123,7 @@ export function ApplyInputHandlers() {
     });
     BlockInputButton.addEventListener("click", (ev) => {
         if (ViewerApp.ViewOnlyMode) {
-            alert("View-only mode is enabled.");
+            alert("开启了只读模式.");
             return;
         }
         BlockInputButton.classList.toggle("toggled");
@@ -143,7 +143,7 @@ export function ApplyInputHandlers() {
             url = `${location.origin}${location.pathname}?casterID=${ViewerApp.CasterID}&serviceID=${ViewerApp.ServiceID}`;
         }
         ViewerApp.ClipboardWatcher.SetClipboardText(url);
-        ShowMessage("Link copied to clipboard.");
+        ShowMessage("已复制邀请链接.");
     });
     KeyboardButton.addEventListener("click", (ev) => {
         closeAllHorizontalBars(null);
@@ -408,17 +408,17 @@ export function ApplyInputHandlers() {
         ViewerApp.MessageSender.GetWindowsSessions();
     });
     WindowsSessionSelect.addEventListener("change", () => {
-        ShowMessage("Switching sessions...");
+        ShowMessage("切换会话中...");
         ViewerApp.MessageSender.ChangeWindowsSession(Number(WindowsSessionSelect.selectedOptions[0].value));
     });
     RecordSessionButton.addEventListener("click", () => {
         RecordSessionButton.classList.toggle("toggled");
         if (RecordSessionButton.classList.contains("toggled")) {
-            RecordSessionButton.innerHTML = `Stop <i class="fas fa-record-vinyl">`;
+            RecordSessionButton.innerHTML = `停止 <i class="fas fa-record-vinyl">`;
             ViewerApp.SessionRecorder.Start();
         }
         else {
-            RecordSessionButton.innerHTML = `Start <i class="fas fa-record-vinyl">`;
+            RecordSessionButton.innerHTML = `开始 <i class="fas fa-record-vinyl">`;
             ViewerApp.SessionRecorder.Stop();
         }
     });

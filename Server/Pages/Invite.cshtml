@@ -1,17 +1,17 @@
 ﻿@page
 @model Remotely.Server.Pages.InviteModel
 @{
-    ViewData["Title"] = "Invite";
+    ViewData["Title"] = "邀请";
 }
-<h3>Organization Invite</h3>
+<h3>组织邀请</h3>
 <hr />
 <div class="row">
     <div class="col-sm-12">
         @if (Model.Success)
         {
-            <h5>Congratulations!</h5>
+            <h5>恭喜!</h5>
             <p class="text-info">
-                You've successfully joined the organization!
+                您以成功加入了组织!
             </p>
         }
 
@@ -20,14 +20,14 @@
             <form method="post">
                 <div>
                     <strong class="text-danger">WARNING: </strong>
-                    <p class="text-danger">You will leave your current organization and lose access to its agents unless someone is able to invite you back in.</p>
-                    <p>Are you sure you want to leave your current organization and join this one?</p>
+                    <p class="text-danger">您将离开当前组织。将失去访问它的所有客户端，知道有人邀请您回来.</p>
+                    <p>您确定要离开当前组织然后加入这个吗？</p>
                 </div>
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <input asp-for="Input.InviteID" hidden />
                 <div class="form-group">
-                    <button type="button" class="btn btn-secondary mr-3" onclick="location.assign(location.origin)">Cancel</button>
-                    <button type="submit" class="btn btn-danger">Confirm</button>
+                    <button type="button" class="btn btn-secondary mr-3" onclick="location.assign(location.origin)">取消</button>
+                    <button type="submit" class="btn btn-danger">确定</button>
                 </div>
             </form>
         }

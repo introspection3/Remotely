@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Remotely.Desktop.Win.Views"
         xmlns:vm="clr-namespace:Remotely.Desktop.Win.ViewModels"
         mc:Ignorable="d"
-        Title="File Transfer"
+        Title="文件传输"
         Height="300" Width="400" 
         Topmost="True"
         ContentRendered="Window_ContentRendered"
@@ -25,12 +25,12 @@
         </Grid.RowDefinitions>
         
         <TextBlock FontWeight="Bold" FontSize="16" Grid.Row="0">
-            <Run>Upload files to</Run>
+            <Run>上传文件到</Run>
             <Run Text="{Binding ViewerName}"></Run>
         </TextBlock>
 
         <TextBlock Grid.Row="1" Margin="0,10,0,0">
-            Current Uploads:
+            当前上传:
         </TextBlock>
 
         <Border Grid.Row="2" Margin="0,5,0,0" BorderBrush="LightGray" BorderThickness="1">
@@ -62,7 +62,7 @@
         </Border>
 
         <Button Grid.Row="3" Margin="0,10,0,0" Height="60" Style="{StaticResource NormalButton}" Command="{Binding OpenFileUploadDialog}">
-            Click here to upload files.
+            上传文件...
         </Button>
     </Grid>
 </Window>

@@ -14,7 +14,7 @@
             var activeSessions = CasterHub.SessionInfoList.Where(x => x.Value.RequesterUserName == HttpContext.User.Identity.Name);
             foreach (var session in activeSessions)
             {
-                await CasterHubContext.Clients.Client(session.Value.CasterSocketID).SendAsync("Disconnect", "User logged out.");
+                await CasterHubContext.Clients.Client(session.Value.CasterSocketID).SendAsync("Disconnect", "用户已退出.");
                 await ViewerHubContext.Clients.Client(session.Value.RequesterSocketID).SendAsync("ConnectionFailed");
             }
 
